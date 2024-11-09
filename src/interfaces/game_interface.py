@@ -16,7 +16,7 @@ class IGame(ABC):
         pass
 
     @abstractmethod
-    def check_guess(self, guess: List[str]) -> tuple[int, int]:
+    def check_guess(self, guess: List[str]) -> Tuple[int, int]:
         """
         Check the guess against the secret code.
         Returns:
