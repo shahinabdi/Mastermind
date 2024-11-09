@@ -1,6 +1,7 @@
-from typing import List
+from typing import List, Dict
+import random
 from ..interfaces.player_interface import IPlayer
-from ..utils.constants import GameRules
+from ..utils.constants import GameRules, Color
 
 
 class HumanPlayer(IPlayer):
@@ -22,3 +23,48 @@ class HumanPlayer(IPlayer):
         print(
             f"Correct position: {GameRules.CORRECT_POSITION * correct_position}")
         print(f"Correct color: {GameRules.CORRECT_COLOR * correct_color}")
+
+
+class ComputerPlayer(IPlayer):
+    def __init__(self):
+        self.possible_colors = GameRules.DEFAULT_COLORS
+        self.last_guess: List[str] = []
+        self.feedback_history: List[Dict] = []
+
+    def make_guess(self) -> List[str]:
+        """
+        Make a guess based on simple strategy:
+        - First guess: Random colors
+        - Subsequent guesses: Use feedback to make more informed guesses
+        """
+        if not self.feedback_history:
+            # First guess is random
+            self.last_guess = random.choices(
+                self.possible_colors,
+                k=GameRules.CODE_LENGTH
+            )
+        else:
+            # Use previous feedback to make a more informed guess
+            # This is a simple strategy that could be improved
+            good_colors = set()
+            for feedback in self.feedback_history:
+                if feedback['correct_position'] + feedback['correct_color'] > 0:
+                    good_colors.update(feedback['guess'])
+
+            # If we have good colors, prefer them
+            colors_to_use = list(
+                good_colors) if good_colors else self.possible_colors
+            self.last_guess = random.choices(
+                colors_to_use,
+                k=GameRules.CODE_LENGTH
+            )
+
+        return self.last_guess
+
+    def get_feedback(self, correct_position: int, correct_color: int) -> None:
+        """Store feedback for future guesses."""
+        self.feedback_history.append({
+            'guess': self.last_guess,
+            'correct_position': correct_position,
+            'correct_color': correct_color
+        })
