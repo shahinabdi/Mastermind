@@ -27,24 +27,37 @@ Mastermind is a code-breaking game where one player creates a secret code and an
 
 ```
 mastermind/
-├── src/
-│   ├── game/
-│   │   ├── config.py         # Game configuration
-│   │   ├── game_controller.py # Main game logic
-│   │   ├── mastermind.py     # Core game mechanics
-│   │   └── players.py        # Player implementations
-│   ├── interfaces/
-│   │   ├── game_interface.py # Game interfaces
-│   │   └── player_interface.py # Player interfaces
-│   └── utils/
-│       └── constants.py      # Game constants
-├── tests/
-│   ├── game/
-│   │   ├── test_config.py
-│   │   ├── test_game_controller.py
-│   │   └── test_players.py
-│   └── test_main.py
-└── README.md
+├── conftest.py               # Pytest configuration for all tests
+├── LICENSE                   # MIT License file
+├── README.md                # Project documentation
+├── requirements.txt         # Project dependencies
+├── pytest.ini              # Pytest settings
+├── setup.py                # Package installation configuration
+├── src/                    # Source code root
+│   ├── __init__.py        # Makes src a Python package
+│   ├── game/              # Game logic package
+│   │   ├── __init__.py
+│   │   ├── config.py      # Game configuration settings
+│   │   ├── game_controller.py  # Main game controller
+│   │   ├── mastermind.py      # Core game mechanics
+│   │   └── players.py         # Player implementations
+│   ├── interfaces/        # Abstract base classes
+│   │   ├── __init__.py
+│   │   ├── game_interface.py  # Game interface definitions
+│   │   └── player_interface.py # Player interface definitions
+│   ├── main.py           # Application entry point
+│   ├── models/           # Data models (if needed)
+│   │   └── __init__.py
+│   └── utils/            # Utility functions and constants
+│       ├── __init__.py
+│       └── constants.py  # Game constants and enums
+├── tests/               # Test suite directory
+│   ├── __init__.py     # Makes tests a package
+│   ├── test_config.py          # Tests for game configuration
+│   ├── test_game_controller.py # Tests for game controller
+│   ├── test_game.py           # Tests for core game mechanics
+│   ├── test_main.py           # Tests for main entry point
+│   └── test_players.py        # Tests for player implementations
 ```
 
 ### Technologies Used
