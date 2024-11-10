@@ -1,7 +1,10 @@
+# Standard library imports
 import random
 from typing import List, Tuple
-from ..interfaces.game_interface import IGame
-from ..game.config import GameConfig
+
+# Local application imports
+from src.interfaces.game_interface import IGame
+from src.game.config import GameConfig
 
 
 class MastermindGame(IGame):

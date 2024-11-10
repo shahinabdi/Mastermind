@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List
 from ..utils.constants import GameRules
 
@@ -8,7 +8,9 @@ class GameConfig:
     """Game configuration settings."""
     code_length: int = GameRules.CODE_LENGTH
     max_attempts: int = GameRules.MAX_ATTEMPTS
-    available_colors: List[str] = GameRules.DEFAULT_COLORS
+    available_colors: List[str] = field(
+        default_factory=lambda: GameRules.DEFAULT_COLORS
+    )
 
     def validate(self) -> bool:
         """Validate configuration settings."""
