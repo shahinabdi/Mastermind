@@ -1,0 +1,14 @@
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Type checking
+mypy==1.7.0
+
+# Code formatting
+black==23.11.0
+isort==5.12.0
+
+# Linting
+pylint==3.0.2
+flake8==6.1.0

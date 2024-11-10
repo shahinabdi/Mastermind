@@ -20,12 +20,22 @@ var/
 .installed.cfg
 *.egg
 
-# IDEs
+# Virtual Environment
+venv/
+.env
+.venv
+ENV/
+
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
 
-# Virtual Environment
-venv/
-ENV/
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# mypy
+.mypy_cache/
