@@ -1,21 +1,26 @@
-from typing import List, Dict
+# Standard library imports
 import random
-from ..interfaces.player_interface import IPlayer
-from ..utils.constants import GameRules, Color
+from typing import List, Dict
+
+# Local application imports
+from src.interfaces.player_interface import IPlayer
+from src.utils.constants import GameRules, Color
 
 
 class HumanPlayer(IPlayer):
     def make_guess(self) -> List[str]:
         """Get guess from human player."""
+        available_colors = [color.value for color in Color]
         while True:
-            guess = input(f"Enter your guess ({GameRules.CODE_LENGTH} colors"
-                          f" from {', '.join(GameRules.DEFAULT_COLORS)}): "
-                          ).upper().split()
+            guess = input(
+                f"Enter your guess ({GameRules.CODE_LENGTH} colors"
+                f" from {', '.join(available_colors)}): "
+            ).upper().split()
 
-            if len(guess) == GameRules.CODE_LENGTH and all(
-                color in GameRules.DEFAULT_COLORS for color in guess
-            ):
+            if (len(guess) == GameRules.CODE_LENGTH and
+                    all(color in available_colors for color in guess)):
                 return guess
+
             print("Invalid guess. Please try again.")
 
     def get_feedback(self, correct_position: int, correct_color: int) -> None:
@@ -27,7 +32,7 @@ class HumanPlayer(IPlayer):
 
 class ComputerPlayer(IPlayer):
     def __init__(self):
-        self.possible_colors = GameRules.DEFAULT_COLORS
+        self.possible_colors = [color.value for color in Color]
         self.last_guess: List[str] = []
         self.feedback_history: List[Dict] = []
 
@@ -45,7 +50,6 @@ class ComputerPlayer(IPlayer):
             )
         else:
             # Use previous feedback to make a more informed guess
-            # This is a simple strategy that could be improved
             good_colors = set()
             for feedback in self.feedback_history:
                 if feedback['correct_position'] + feedback['correct_color'] > 0:
