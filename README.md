@@ -1,5 +1,8 @@
 # Mastermind Game
 
+![Tests](https://github.com/shahinabdi/mastermind/actions/workflows/test.yml/badge.svg)
+[![codecov](https://codecov.io/gh/shahinabdi/mastermind/branch/main/graph/badge.svg)](https://codecov.io/gh/shahinabdi/mastermind)
+
 A command-line implementation of the classic Mastermind game in Python. This project was originally created as a university assignment and has been rebuilt with modern Python practices, comprehensive testing, and proper software architecture.
 
 ## Author
