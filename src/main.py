@@ -1,33 +1,34 @@
-from game.game_controller import GameController
-from game.players import HumanPlayer, ComputerPlayer
+# Local application imports
+from src.game.game_controller import GameController
+from src.game.players import HumanPlayer, ComputerPlayer
 
 
-def main():
-    # Get game mode
-    print("Welcome to Mastermind!")
-    print("1. Play as Human")
-    print("2. Watch Computer Play")
-
+def get_player_choice() -> int:
+    """Get valid player choice from user."""
     while True:
+        print("\nWelcome to Mastermind!")
+        print("1. Play as Human")
+        print("2. Watch Computer Play")
         try:
             choice = int(input("Choose mode (1-2): "))
             if choice in (1, 2):
-                break
+                return choice
             print("Please enter 1 or 2")
         except ValueError:
             print("Please enter a valid number")
 
-    # Create appropriate player
+
+def play_game() -> None:
+    """Main game function."""
+    choice = get_player_choice()
     player = HumanPlayer() if choice == 1 else ComputerPlayer()
 
-    # Start game
     game = GameController(player)
     game.play()
 
-    # Ask to play again
     if input("\nPlay again? (y/n): ").lower().startswith('y'):
-        main()
+        play_game()
 
 
 if __name__ == "__main__":
-    main()
+    play_game()
